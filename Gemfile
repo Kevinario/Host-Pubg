@@ -5,9 +5,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 #Bootstrap
 gem 'bootstrap-sass', '~> 3.3.7'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '1.3.13'
-#gem 'sqlite3'
 #Simple Form
 gem 'simple_form'
 #Devise
@@ -41,6 +38,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
   gem 'byebug'
 end
 
@@ -53,5 +52,6 @@ group :development do
 end
   
 group :production do
+  gem 'pg'
 end
 
