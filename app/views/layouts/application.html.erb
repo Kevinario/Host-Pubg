@@ -15,6 +15,9 @@
         <%= link_to "Host PUBG", root_path, class: "navbar-brand"%>
       </div>
       <ul class="nav navbar-nav navbar-right">
+        <% loggedState.each do |link| %>
+        <li><%= link %></li>
+        <% end %>
         <li><%= link_to "About", "#"%></li>
         <li><%= link_to "FAQ", "#"%></li>
       </ul>
