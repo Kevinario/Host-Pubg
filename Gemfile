@@ -52,6 +52,7 @@ group :development do
 end
   
 group :production do
+  gem 'sendgrid-ruby'
   gem 'pg'
 end
 
