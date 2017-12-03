@@ -15,14 +15,14 @@ Rails.application.routes.draw do
    # get 'signup', to: 'devise/registrations#new'
   # end
   get 'blog', to: 'posts#index'
-  get 'blog/newpost', to: 'posts#new'
+  get 'blog/newpost', to: 'posts#new', as: 'posts'
   get 'blog/:id', to: 'posts#show', as: 'post'
   #get 'blog/:id/edit', to: 'posts#edit', as: 'edit_post'
   #DELETE 'blog/:id' to: 'posts#update' as: 'posts'
   patch 'blog/:id', to: 'posts#update'
   delete 'blog/:id', to: 'posts#destroy'
   get 'blog/:id/edit', to: 'posts#edit', as: 'edit_post'
-  post 'blog', to: 'posts#create'
+  post 'blog/newpost', to: 'posts#create'
   get 'about', to: 'static_pages#about'
   get 'faq', to: 'static_pages#faq'
 end

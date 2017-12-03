@@ -20,3 +20,6 @@
         <div class='col-md-2'></div>
     </div>
 <% end %>
+<% if current_user.try(:admin)%>
+<%= link_to "New Post", posts_path %>
+<% end %>
