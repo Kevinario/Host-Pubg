@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     
     def create
         @post = Post.create(post_params)
-        redirect_to posts_path
+        redirect_to blog_path
     end
     
     def edit
@@ -22,12 +22,12 @@ class PostsController < ApplicationController
     
     def update
         @post.update(post_params)
-        redirect_to posts_path
+        redirect_to blog_path
     end
     
     def destroy
         @post.destroy
-        redirect_to posts_path
+        redirect_to blog_path
     end
     
     private
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     
     def check_admin
         if not current_user.try(:admin?)
-            redirect_to posts_path
+            redirect_to blog_path
         end
     end
 end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'posts#index'
+  root 'static_pages#homepage'
   #devise_for :users, skip: [:passwords]
   devise_for :users
   #devise_for :users, path: 'account', path_names: { sign_in: 'login', sign_out: 'logout', password: 'forgot', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'signup' }
@@ -14,6 +14,15 @@ Rails.application.routes.draw do
    # get 'cancel', to: 'devise/registrations#cancel'
    # get 'signup', to: 'devise/registrations#new'
   # end
-  
-  resources :posts
+  get 'blog', to: 'posts#index'
+  get 'blog/newpost', to: 'posts#new'
+  get 'blog/:id', to: 'posts#show', as: 'post'
+  #get 'blog/:id/edit', to: 'posts#edit', as: 'edit_post'
+  #DELETE 'blog/:id' to: 'posts#update' as: 'posts'
+  patch 'blog/:id', to: 'posts#update'
+  delete 'blog/:id', to: 'posts#destroy'
+  get 'blog/:id/edit', to: 'posts#edit', as: 'edit_post'
+  post 'blog', to: 'posts#create'
+  get 'about', to: 'static_pages#about'
+  get 'faq', to: 'static_pages#faq'
 end
