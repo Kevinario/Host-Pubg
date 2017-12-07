@@ -25,4 +25,5 @@ Rails.application.routes.draw do
   post 'blog/newpost', to: 'posts#create'
   get 'about', to: 'static_pages#about'
   get 'faq', to: 'static_pages#faq'
+  get 'purchase', to: 'purchases#new', as: 'new_purchase'
 end
