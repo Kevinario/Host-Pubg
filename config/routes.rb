@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   get 'about', to: 'static_pages#about'
   get 'faq', to: 'static_pages#faq'
   get 'purchase', to: 'purchases#new', as: 'new_purchase'
+  post 'purchase', to: 'purchases#create'
+  #resources :purchases
 end

@@ -15,6 +15,7 @@
         <%= link_to "PUBG-Servers", root_path, class: "navbar-brand"%>
       </div>
       <ul class="nav navbar-nav navbar-right">
+        <li><%= user_profile %></li>
         <li><%= loggedState %></li>
         <li><%= link_to "Blog", blog_path%></li>
         <li><%= link_to "About", about_path%></li>
@@ -37,7 +38,7 @@
 
 <footer>
   <div class="container">
-    <ul class="nav nav-pills otherthingo">
+    <ul class="nav nav-pills footerLinks">
       <li><%= link_to "Twitter", "#"%></li>
       <li><%= link_to "Facebook", "#"%></li>
       <li><%= link_to "Discord", "#"%></li>
