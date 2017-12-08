@@ -1,10 +1,7 @@
 require 'test_helper'
 
-class PostsControllerTest < ActionController::TestCase
+class PaymentsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end
-    
-  
-  end
 end

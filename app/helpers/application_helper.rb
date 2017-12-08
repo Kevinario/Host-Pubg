@@ -10,7 +10,7 @@ module ApplicationHelper
     
     def user_profile
         if user_signed_in?
-            return (link_to "Account", "#")
+            return (link_to "Account", account_url)
         end
     end
 end

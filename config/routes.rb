@@ -14,7 +14,7 @@ Rails.application.routes.draw do
    # get 'cancel', to: 'devise/registrations#cancel'
    # get 'signup', to: 'devise/registrations#new'
   # end
-  get 'blog', to: 'posts#index'
+  get 'blog', to: 'posts#index', as: 'blog'
   get 'blog/newpost', to: 'posts#new', as: 'posts'
   get 'blog/:id', to: 'posts#show', as: 'post'
   #get 'blog/:id/edit', to: 'posts#edit', as: 'edit_post'
@@ -27,5 +27,6 @@ Rails.application.routes.draw do
   get 'faq', to: 'static_pages#faq'
   get 'purchase', to: 'purchases#new', as: 'new_purchase'
   post 'purchase', to: 'purchases#create'
-  #resources :purchases
+  get 'payment', to: 'payments#new', as: 'new_payment'
+  get 'account', to: 'user#show', as: 'account'
 end

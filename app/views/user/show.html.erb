@@ -1,0 +1,4 @@
+<p><%= current_user.email %></p>
+<% Purchase.where(user_id: current_user.id).find_each do |server| %>
+<p><%= server.id %></p>
+<% end %>
