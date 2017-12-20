@@ -5,6 +5,4 @@ class PostsControllerTest < ActionController::TestCase
   #   assert true
   # end
     
-  
-  end
 end

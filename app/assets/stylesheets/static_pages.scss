@@ -1,3 +1,27 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#homepage-logo {
+    //height: 500px;
+    width: 100%;
+    padding-bottom: 30px;
+    
+}
+
+#homepage-purchase {
+    padding-top: 0px;
+    
+}
+
+#twoClick {
+    //width: 100px;
+    margin-bottom: 20px;
+}
+
+#purchase-list {
+    list-style-type: none;
+    margin: auto;
+    text-align: center;
+    
+}

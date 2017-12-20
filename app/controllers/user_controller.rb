@@ -1,6 +1,7 @@
 class UserController < ApplicationController
     before_action :authenticate_user!
     def show
-        #@servers = User.find_by
+        @user = current_user
+        @activeServers = Purchase.where(user_id: current_user.id, active: true)
     end
 end

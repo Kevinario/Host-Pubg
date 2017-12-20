@@ -24,9 +24,9 @@ Rails.application.routes.draw do
   get 'blog/:id/edit', to: 'posts#edit', as: 'edit_post'
   post 'blog/newpost', to: 'posts#create'
   get 'about', to: 'static_pages#about'
-  get 'faq', to: 'static_pages#faq'
+  get 'faq', to: 'static_pages#faq', as: 'faq'
   get 'purchase', to: 'purchases#new', as: 'new_purchase'
   post 'purchase', to: 'purchases#create'
-  get 'payment', to: 'payments#new', as: 'new_payment'
   get 'account', to: 'user#show', as: 'account'
+  #get 'cancel/:id', to 'cancellations#show'
 end

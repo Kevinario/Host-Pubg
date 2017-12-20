@@ -11,6 +11,7 @@ class PostsController < ApplicationController
     
     def create
         @post = Post.create(post_params)
+        flash[:success] = "New post created"
         redirect_to blog_path
     end
     
@@ -22,11 +23,13 @@ class PostsController < ApplicationController
     
     def update
         @post.update(post_params)
+        flash[:warning] = "Post Editted"
         redirect_to blog_path
     end
     
     def destroy
         @post.destroy
+        flash[:danger] = "Post Deleted"
         redirect_to blog_path
     end
     

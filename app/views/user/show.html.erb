@@ -1,4 +1,26 @@
-<p><%= current_user.email %></p>
-<% Purchase.where(user_id: current_user.id).find_each do |server| %>
-<p><%= server.id %></p>
-<% end %>
+<h3>Profile: <%= @user.email %></h3>
+<div>
+    Active Servers
+<table>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Players Online</th>
+    <th>Manage</th>
+    <th>Cancel</th>
+    <th>Renew Date</th>
+    <th>Renew</th>
+    <% @activeServers.find_each do |server| %>
+    <tr>
+        <td><%= server.id %></td>
+        <td><%= 'TODO' %></td>
+        <td><%= 'TODO'  %></td>
+        <td><%= server.id %></td>
+        <td><%= server.id  %></td>
+        <td><%= server.expireDate %></td>
+        <td><%= server.id %></td>
+    </tr>
+    
+    <% end %>
+</table>
+
+</div>

@@ -1,6 +1,36 @@
-<p>Image Here</p>
+<div>
+    <%= image_tag("PUBGHomepage.png", alt: "PlayerUnknown's Battlegrounds Logo", id:'homepage-logo')%>
+    
+    
+</div>
+<div class='col-md-3'></div>
+<div class="well col-md-6" id="homepage-purchase">
+    <ul id= "purchase-list">
+        <li>
+            <h3 id="twoClick">Two Click Rental</h3>
+        </li>
+        
+        <li>
+            3 Server Locations
+        </li>
+        
+        <li>
+            100 Player Servers
+        </li>
+        
+        <li>
+            Multiple Maps
+        </li>
+        
+        <li>
+            Price: $40 USD
+        </li>
+        
+        <li>
+            <%= link_to "Purchase", new_purchase_url, :method => "get", :class => "btn btn-success"%>
+        </li>
+    </ul>
+</div>
+<div class='col-md-3'></div>
 
-<p><%= link_to 'Purchase', new_purchase_url %></p>
-
-
-<p>Screenshots and features here</p>
+<div class='col-md-12'>Screenshots and features here</div>
