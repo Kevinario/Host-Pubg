@@ -8,11 +8,6 @@ class PurchasesController < ApplicationController
     
     def create
         @amount = 4000
-      
-        #customer = Stripe::Customer.create(
-        #    :email => params[:stripeEmail],
-        #    :source => params[:stripeToken]
-        #    )
         begin
             charge = Stripe::Charge.create(
                 :amount => @amount,
@@ -35,18 +30,6 @@ class PurchasesController < ApplicationController
         
         flash[:success] = "Card has been accepted"
         @purchase = Purchase.create(:renew => purchase_params[:renew],:location => purchase_params[:location],:user_id => current_user.id,:plan => "standard",:expireDate => Time.now.to_date + 1.month,:purchaseTime => Time.now,:active => true,:cancelled => false)
-        
-        
-        
-        
-       # subscription = Stripe::Subscription.create(
-       #     :customer => customer.id,
-       #     :items => [
-       #         {
-       #             :plan => "standard",
-       #         },
-       #     ],
-      #  )
         redirect_to root_url
     end
     

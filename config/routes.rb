@@ -28,5 +28,9 @@ Rails.application.routes.draw do
   get 'purchase', to: 'purchases#new', as: 'new_purchase'
   post 'purchase', to: 'purchases#create'
   get 'account', to: 'user#show', as: 'account'
-  #get 'cancel/:id', to 'cancellations#show'
+  get 'cancel/:id', to: 'cancellations#new', as: 'new_cancel'
+  post 'cancel/:id', to: 'cancellations#create', as: 'create_cancel'
+  post 're_enable/:id', to: 'cancellations#re_enable', as: 're_enable'
+  get 'renew/:id', to: 'renew#new', as: 'renew'
+  get 'manage/:id', to: 'user#manage', as: "manage"
 end

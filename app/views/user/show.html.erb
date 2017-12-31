@@ -12,12 +12,26 @@
     <% @activeServers.find_each do |server| %>
     <tr>
         <td><%= server.id %></td>
-        <td><%= 'TODO' %></td>
+        <td>
+            <% if !server.active %>
+            <%= 'EXPIRED'%>
+            <% elsif server.cancelled%>
+            <%= "CANCELLED" %>
+            <% else %>
+            <%= "ACTIVE"%>
+            <% end %>
+        </td>
         <td><%= 'TODO'  %></td>
-        <td><%= server.id %></td>
-        <td><%= server.id  %></td>
+        <td><%= link_to "Manage", manage_url(server.id), :method => "get", :class => "btn btn-primary" %></td>
+        <td>
+        <% if !server.cancelled %>
+        <%= link_to "Cancel", new_cancel_url(server.id), :method => "get", :class => "btn btn-danger"%>
+        <% else %>
+        <%= link_to "Enable", re_enable_url(server.id), :method => "post", :class => "btn btn-primary"%>
+        <% end %>
+        </td>
         <td><%= server.expireDate %></td>
-        <td><%= server.id %></td>
+        <td><%= link_to "Renew", renew_url(server.id), :method => "get", :class => "btn btn-success" %></td>
     </tr>
     
     <% end %>

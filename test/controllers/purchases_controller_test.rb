@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class PurchasesControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  include Devise::Test::ControllerHelpers  
+
+  test "redirected if not logged in" do
+    get(:new)
+    assert_response :redirect
+    
+  end
 end
