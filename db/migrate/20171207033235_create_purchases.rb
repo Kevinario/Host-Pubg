@@ -5,9 +5,9 @@ class CreatePurchases < ActiveRecord::Migration
       t.string :plan
       t.string :location
       t.date :expireDate
-      t.boolean :renew
       t.boolean :active
       t.datetime :purchaseTime
+      t.boolean :cancelled
     end
   end
 end

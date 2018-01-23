@@ -8,28 +8,74 @@ class PurchasesController < ApplicationController
     
     def create
         @amount = 4000
-        begin
-            charge = Stripe::Charge.create(
-                :amount => @amount,
-                :currency => 'usd',
-                :description => 'Server Setup',
-                :source => params[:stripeToken]
-                )
-        rescue Stripe::CardError => e
-            #Users card was declined
-            flash[:danger] = "Card Error Encountered"
-            redirect_to new_purchase_url
-            return
+        @user = current_user
         
-        rescue => e
-            #Something else went wrong
-            flash[:danger] = "Error Encountered"
-            redirect_to new_purchase_url
-            return
+        
+        #Really dodgy implementation, really need to work on improving this at some point
+        
+        customer = nil
+        allCustomers = Stripe::Customer.all
+        allCustomers.select do |c|
+            if c.email == @user.email
+                customer = c
+                break
+            end
         end
         
-        flash[:success] = "Card has been accepted"
-        @purchase = Purchase.create(:renew => purchase_params[:renew],:location => purchase_params[:location],:user_id => current_user.id,:plan => "standard",:expireDate => Time.now.to_date + 1.month,:purchaseTime => Time.now,:active => true,:cancelled => false)
+        if customer.nil?
+            begin
+                customer = Stripe::Customer.create(
+                    :email => @user.email,
+                    :source => params[:stripeToken],
+                    )
+            rescue Stripe::CardError => e
+                #Card Error
+                flash[:danger] = "Card Error Encountered"
+                redirect_to new_purchase_url
+                return 
+                
+            rescue Stripe::StripeError => e
+                #Generic Error
+                flash[:danger] = "Stripe Error Encountered"
+                redirect_to new_purchase_url
+                return
+                
+            rescue => e
+                flash[:danger] = "Generic Error Encountered"
+                redirect_to new_purchase_url
+                return
+                
+            end
+        end
+        
+        begin
+            subscription = Stripe::Subscription.create(
+                :customer => customer.id,
+                :items => [{:plan => "standard"}],
+                :metadata => {order_id: Purchase.count + 1}
+                )
+        rescue Stripe::StripeError => e
+            flash[:danger] = "Stripe Error Encountered"
+            redirect_to new_purchase_url
+            return
+            
+        rescue => e
+            flash[:danger] = "Generic Error Encountered"
+            redirect_to new_purchase_url
+            return
+            
+        end
+        
+        flash[:success] = "Subscription created"
+        
+        #if
+        @purchase = Purchase.create(:location => purchase_params[:location],:user_id => current_user.id,:plan => "standard",:expireDate => Time.now,:purchaseTime => Time.now,:active => false,:cancelled => false)
+            #unless @server = Server.create(:name => "Default", :status => "Offline", :purchase_id => @purchase.id)
+                #Server Error handler here
+            #end
+        #else
+            #purchase creating error
+        #end
         redirect_to root_url
     end
     
@@ -37,7 +83,6 @@ class PurchasesController < ApplicationController
     
     def purchase_params
         params.require(:purchase).permit(:location,:renew)
-    
     end
     
 end

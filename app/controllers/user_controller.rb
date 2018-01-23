@@ -8,7 +8,7 @@ class UserController < ApplicationController
     end
     
     def manage
-        
+        @serverInfo = Server.find_by(purchase_id: @server.id)
     end
     
     

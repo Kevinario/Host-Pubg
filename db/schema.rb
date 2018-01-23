@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207075137) do
+ActiveRecord::Schema.define(version: 20180106084925) do
 
   create_table "posts", force: :cascade do |t|
-    t.text     "postText"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "caption"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "title"
   end
 
@@ -25,13 +25,18 @@ ActiveRecord::Schema.define(version: 20171207075137) do
     t.string   "plan"
     t.string   "location"
     t.date     "expireDate"
-    t.boolean  "renew"
     t.boolean  "active"
     t.datetime "purchaseTime"
     t.boolean  "cancelled"
   end
 
   add_index "purchases", ["user_id"], name: "index_purchases_on_user_id"
+
+  create_table "servers", force: :cascade do |t|
+    t.string  "name"
+    t.string  "status"
+    t.integer "purchase_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false

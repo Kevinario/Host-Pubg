@@ -8,19 +8,11 @@
     <th>Manage</th>
     <th>Cancel</th>
     <th>Renew Date</th>
-    <th>Renew</th>
     <% @activeServers.find_each do |server| %>
+    <% serverInfo = Server.find_by(purchase_id: server.id) %>
     <tr>
-        <td><%= server.id %></td>
-        <td>
-            <% if !server.active %>
-            <%= 'EXPIRED'%>
-            <% elsif server.cancelled%>
-            <%= "CANCELLED" %>
-            <% else %>
-            <%= "ACTIVE"%>
-            <% end %>
-        </td>
+        <td><%= serverInfo.name %></td>
+        <td><%= serverInfo.status %></td>
         <td><%= 'TODO'  %></td>
         <td><%= link_to "Manage", manage_url(server.id), :method => "get", :class => "btn btn-primary" %></td>
         <td>
@@ -31,7 +23,6 @@
         <% end %>
         </td>
         <td><%= server.expireDate %></td>
-        <td><%= link_to "Renew", renew_url(server.id), :method => "get", :class => "btn btn-success" %></td>
     </tr>
     
     <% end %>

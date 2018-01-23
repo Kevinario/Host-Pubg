@@ -31,6 +31,6 @@ Rails.application.routes.draw do
   get 'cancel/:id', to: 'cancellations#new', as: 'new_cancel'
   post 'cancel/:id', to: 'cancellations#create', as: 'create_cancel'
   post 're_enable/:id', to: 'cancellations#re_enable', as: 're_enable'
-  get 'renew/:id', to: 'renew#new', as: 'renew'
   get 'manage/:id', to: 'user#manage', as: "manage"
+  post 'charge', to: 'hooks#charge'
 end

@@ -1,8 +1,6 @@
 <%= simple_form_for @purchase, url: new_purchase_url do |f|%>
     Server Location: <br/>
     <%= f.collection_radio_buttons :location, [['Dallas', 'Dallas'] ,['Dallas', 'Germany']], :first, :last %><br/>
-    Auto-Renew: <br/>
-    <%= f.collection_radio_buttons :renew, [[true,'Yes'],[false,'No']], :first, :last %> <br/>
     <div>
         <label for="card-element">
             Credit or debit card
