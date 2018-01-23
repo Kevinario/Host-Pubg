@@ -1,7 +1,7 @@
 class HooksController < ApplicationController
     require 'json'
-    protect_from_forgery except: stripe_webhook
-    skip_before_action :verify_authenticity_token
+    #protect_from_forgery except: stripe_webhook
+    #skip_before_action :verify_authenticity_token
     
     def charge
         Post.create(caption: "Thingo", title: "Thingo")
