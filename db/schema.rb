@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180106084925) do
+ActiveRecord::Schema.define(version: 20180124083046) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "caption"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180106084925) do
     t.boolean  "active"
     t.datetime "purchaseTime"
     t.boolean  "cancelled"
+    t.boolean  "expired",      default: false
   end
 
   add_index "purchases", ["user_id"], name: "index_purchases_on_user_id"

@@ -8,8 +8,26 @@ class CancellationsController < ApplicationController
     end
     
     def create
-        @server.update(cancelled: true)
+        customer = get_stripe_user(current_user.email)
+        
+        @current_sub =  nil
+        
+        customer.subscriptions.data.select do |subscription|
+            if subscription.metadata.order_id.to_i == @server.id
+                @current_sub = subscription
+                break
+            end
+        end
+        
+        if @current_sub.nil?
+            flash[:danger] = "Could not find subscription"
+            redirect_to account_url
+            return
+        end
+        
         flash[:warning] = "Server currently cancelled. It may be re-enabled before " + @server.expireDate.to_default_s
+        @server.update(cancelled: true)
+        @current_sub.delete(at_period_end: true)
         redirect_to account_url
     end
     
@@ -21,12 +39,26 @@ class CancellationsController < ApplicationController
             return
         end
         
-        if !@server.active
-            flash[:danger] = "That server has expired. It must be renewed to be re-enabled"
+        
+        customer = get_stripe_user(current_user.email)
+        
+        @current_sub = nil
+        
+        customer.subscriptions.data.select do |subscription|
+            if subscription.metadata.order_id.to_i == @server.id
+                @current_sub = subscription
+                break
+            end
+        end
+        
+        if @current_sub.nil?
+            flash[:danger] = "Could not find that subscription"
             redirect_to account_url
             return
         end
         
+        @current_sub.items.data[0].plan = @server.plan
+        @current_sub.save
         @server.update(cancelled:false)
         flash[:success] = "That server has been re_enabled"
         redirect_to account_url
@@ -54,6 +86,16 @@ class CancellationsController < ApplicationController
                 redirect_to account_url
                 return
             end
+        end
+        
+        def get_stripe_user(email)
+            allCustomers = Stripe::Customer.all
+            allCustomers.select do |c|
+                if c.email == email
+                    return c
+                end
+            end
+            return nil
         end
     
 end
