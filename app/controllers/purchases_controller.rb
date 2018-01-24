@@ -36,7 +36,7 @@ class PurchasesController < ApplicationController
                 
             rescue Stripe::StripeError => e
                 #Generic Error
-                flash[:danger] = "Stripe Error Encountered"
+                flash[:danger] = "Stripe Error Encountered" + e.to_s
                 redirect_to new_purchase_url
                 return
                 
@@ -55,7 +55,8 @@ class PurchasesController < ApplicationController
                 :metadata => {order_id: Purchase.count + 1}
                 )
         rescue Stripe::StripeError => e
-            flash[:danger] = "Stripe Error Encountered"
+            flash[:danger] = "Sub Error:" + e.to_s
+            
             redirect_to new_purchase_url
             return
             
@@ -69,7 +70,7 @@ class PurchasesController < ApplicationController
         flash[:success] = "Subscription created"
         
         #if
-        @purchase = Purchase.create(:location => purchase_params[:location],:user_id => current_user.id,:plan => "standard",:expireDate => Time.now,:purchaseTime => Time.now,:active => false,:cancelled => false)
+        @purchase = Purchase.create(:location => purchase_params[:location],:user_id => current_user.id,:plan => "standard",:expireDate => Time.now.to_date,:purchaseTime => Time.now,:active => false,:cancelled => false)
             #unless @server = Server.create(:name => "Default", :status => "Offline", :purchase_id => @purchase.id)
                 #Server Error handler here
             #end

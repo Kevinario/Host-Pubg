@@ -32,5 +32,5 @@ Rails.application.routes.draw do
   post 'cancel/:id', to: 'cancellations#create', as: 'create_cancel'
   post 're_enable/:id', to: 'cancellations#re_enable', as: 're_enable'
   get 'manage/:id', to: 'user#manage', as: "manage"
-  post 'charge', to: 'hooks#charge'
+  mount StripeEvent::Engine, at: '/charges'
 end
