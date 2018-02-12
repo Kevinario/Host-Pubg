@@ -1,3 +1,15 @@
 <h3>Manage Server</h3>
-<%= @serverInfo.name %>
-<%= @serverInfo.status %>
+<div></div>
+    <div>
+        <%= simple_form_for @serverInfo do |f| %>
+            <%= f.input :name, label: "Server Name: " %>
+            <%= f.button :submit, 'Save', class: 'btn btn-primary' %>
+        <% end %>
+    </div>
+    <div>Current Status: <%= @serverInfo.status %>
+        <div>
+            <%= button_to "Turn on", {action: "update", :method => :patch, params: {id: @server.id, server: {status: "On"}}}, {class: 'btn btn-success'} %>
+            <%= button_to "Turn off", {action: "update", :method => :patch, params: {id: @server.id, server: {status: "Off"}}}, {class: 'btn btn-danger'}%>
+        </div>
+    </div>
+</div>

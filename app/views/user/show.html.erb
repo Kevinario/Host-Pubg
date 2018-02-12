@@ -1,31 +1,44 @@
 <h3>Profile: <%= @user.email %></h3>
 <div>
-    Active Servers
-<table>
-    <th>Name</th>
-    <th>Status</th>
-    <th>Players Online</th>
-    <th>Manage</th>
-    <th>Cancel</th>
-    <th>Renew Date</th>
-    <% @activeServers.find_each do |server| %>
-    <% serverInfo = Server.find_by(purchase_id: server.id) %>
-    <tr>
-        <td><%= serverInfo.name %></td>
-        <td><%= serverInfo.status %></td>
-        <td><%= 'TODO'  %></td>
-        <td><%= link_to "Manage", manage_url(server.id), :method => "get", :class => "btn btn-primary" %></td>
-        <td>
-        <% if !server.cancelled %>
-        <%= link_to "Cancel", new_cancel_url(server.id), :method => "get", :class => "btn btn-danger"%>
-        <% else %>
-        <%= link_to "Enable", re_enable_url(server.id), :method => "post", :class => "btn btn-primary"%>
-        <% end %>
-        </td>
-        <td><%= server.expireDate %></td>
-    </tr>
+    <!-- Nav Tabs -->
+    <ul id="mytabs" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#servers" aria-controls="servers" role="tab" data-toggle="tab">Active Servers</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile Settings</a></li>
+    </ul>
     
-    <% end %>
-</table>
-
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="servers">
+            <table>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Players Online</th>
+                <th>Manage</th>
+                <th>Cancel</th>
+                <th>Renew Date</th>
+                <% @activeServers.find_each do |server| %>
+                <% serverInfo = Server.find_by(purchase_id: server.id) %>
+                <tr>
+                    <td><%= serverInfo.name %></td>
+                    <td><%= serverInfo.status %></td>
+                    <td><%= 'TODO'  %></td>
+                    <td><%= link_to "Manage", manage_url(server.id), :method => "get", :class => "btn btn-primary" %></td>
+                    <td>
+                    <% if !server.cancelled %>
+                    <%= link_to "Cancel", new_cancel_url(server.id), :method => "get", :class => "btn btn-danger"%>
+                    <% else %>
+                    <%= link_to "Enable", re_enable_url(server.id), :method => "post", :class => "btn btn-primary"%>
+                    <% end %>
+                    </td>
+                    <td><%= server.expireDate %></td>
+                </tr>
+                
+                <% end %>
+            </table>
+        </div>
+        
+        <div role="tabpanel" class="tab-pane fade" id="profile">
+            Update Credit Card Settings
+            
+        </div>
+    </div>
 </div>

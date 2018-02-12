@@ -1,6 +1,6 @@
 class UserController < ApplicationController
     before_action :authenticate_user!
-    before_action :select_server, :correct_user, :server_cancelled, :server_not_active, only: [:manage]
+    before_action :select_server, :correct_user, :server_cancelled, :server_not_active, only: [:manage, :update]
     
     def show
         @user = current_user
@@ -8,14 +8,34 @@ class UserController < ApplicationController
     end
     
     def manage
-        @serverInfo = Server.find_by(purchase_id: @server.id)
+        
+    end
+    
+    def update
+        
+        if params[:server][:name]
+            @serverInfo.name = server_params[:name]
+        end
+        
+        if params[:server][:status]
+            @serverInfo.status = server_params[:status]
+        end
+        
+        @serverInfo.save
+        
+        redirect_to manage_url(@server.id)
     end
     
     
     private
-    
+        
+        def server_params
+            params.require(:server).permit(:name,:status)
+        end
+        
         def select_server
             @server = Purchase.find(params[:id])
+            @serverInfo = Server.find_by(purchase_id: @server.id)
         end
         
         def correct_user

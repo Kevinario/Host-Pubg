@@ -65,7 +65,7 @@ StripeEvent.configure do |events|
     purchase.update(active: false, expired: true)
     #Do stuff to shut down server
     server.update(status: "Expired")
-    
+    status 200
     
     
     

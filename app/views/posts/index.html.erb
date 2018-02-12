@@ -7,7 +7,7 @@
             </div>
             
             <div class="panel-body">
-                <%= post.caption %>
+                <%= post.postText %>
                 <div class="postFooter">
                 <%= timeDisplay(post.created_at,post.updated_at) %>
                 <% if current_user.try(:admin)%>
