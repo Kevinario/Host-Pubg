@@ -18,6 +18,11 @@ gem 'coffee-rails', '~> 4.1.0'
 #Stripe gem
 gem 'stripe'
 gem 'stripe_event'
+
+gem 'resque'
+#Net-ssh
+gem 'net-ssh'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

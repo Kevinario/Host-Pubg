@@ -13,4 +13,5 @@ module ApplicationHelper
             return (link_to "Account", account_url)
         end
     end
+    
 end
